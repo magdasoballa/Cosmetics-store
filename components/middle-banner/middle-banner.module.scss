@@ -1,0 +1,118 @@
+@font-face {
+  font-family: "Allura";
+  src: url("../../public/fonts/Allura-Regular.ttf");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+.bannerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background-color: #fbfbfb;
+  margin-top: 100px;
+
+  img {
+    margin-right: 20px;
+    margin-top: 170px;
+    width: 1140px;
+    height: 520px;
+  }
+  .content {
+    position: absolute;
+    right: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h6 {
+      font-size: 30px;
+      color: #808285;
+      font-family: "Allura", sans-serif;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-bottom: 40px;
+      font-weight: 400;
+      text-transform: capitalize;
+    }
+    h1 {
+      font-size: 40px;
+      color: #000;
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-bottom: 40px;
+    }
+    p {
+      font-size: 19px;
+      color: #808285;
+      font-family: "Cormorant", serif;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      width: 44%;
+      text-align: center;
+      font-weight: 500;
+      line-height: 35px;
+      margin-bottom: 50px;
+    }
+    button {
+      width: 172px;
+      height: 42px;
+      font-size: 12px;
+      cursor: pointer;
+      background-color: #000;
+      color: #fff;
+      text-transform: uppercase;
+      border: none;
+      letter-spacing: 3px;
+      line-height: 12px;
+    }
+  }
+  .advantages {
+    display: flex;
+    max-width: 1140px;
+    margin-top: 75px;
+    .singleAdvantage {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        width: 62px;
+        height: 62px;
+        border: 3px solid lightgray;
+        border-radius: 50%;
+        padding: 13px 0 0 13px;
+        img {
+          width: 30px;
+          height: 30px;
+          margin-top: 0;
+        }
+      }
+      h1 {
+        font-weight: 300;
+        font-size: 20px;
+        color: #000;
+        font-family: 'Montserrat',sans-serif;
+        text-transform: uppercase;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-top: 25px;
+        line-height: 30px;
+      }
+      p {
+        font-size: 19px;
+        font-weight: 300;
+        font-family: 'Cormorant',serif;
+        color: #808285;
+        text-align: center
+        ;
+      }
+    }
+  }
+}

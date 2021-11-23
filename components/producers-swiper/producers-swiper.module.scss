@@ -1,0 +1,46 @@
+.producersContainer {
+    display: grid;
+    place-items: center;
+    min-height: 100px;
+}
+
+.slider {
+    height: 250px;
+    margin: auto;
+    position: relative;
+    width: 68%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+	20% { transform: translateX(calc(-250px * 1))}
+	40% { transform: translateX(calc(-250px * 2))}
+	60% { transform: translateX(calc(-250px * 3))}
+	80% { transform: translateX(calc(-250px * 4))}
+	100% { transform: translateX(calc(-250px * 5))}
+}
+
+$animationSpeed: 40s;
+
+.slideTrack {
+    display: flex;
+    width: calc(250px * 10);
+	animation: scroll $animationSpeed ease-in-out infinite;
+}
+
+.slide {
+    height: 200px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+  
+
+    img {
+        width: 100%;
+    
+    }
+}

@@ -7,11 +7,11 @@ import Reviews from "../components/reviews/reviews";
 import Footer from "../components/footer/footer";
 import ProductsAssociations from "../components/products-association/products-associations";
 import Newsletter from "../components/newsletter/newsletter";
+import Layout from "../components/layout/layout";
 
 export default function Home() {
   return (
     <div>
-      <Header />
       <MainBanner />
       <ProductsSection />
       <MiddleBanner />

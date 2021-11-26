@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react/cjs/react.development";
 import SingleProduct from "../single-product/single-product";
 import classes from "./products-associations.module.scss";
 

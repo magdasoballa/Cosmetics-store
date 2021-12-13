@@ -4,6 +4,7 @@ import SingleProduct from "../../components/single-product/single-product";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Layout from "../../components/layout/layout";
+import ProductPage from "../../components/product-page/product-page";
 
 const products = [
   {
@@ -42,8 +43,7 @@ function ProductDetailPage() {
   return (
         <Fragment>
           <Head></Head>
-          <p>Post: {slug}</p>
-          <SingleProduct product={products[0]}/>
+          <ProductPage product={products.find(el => el.name === slug)}/>
         </Fragment>
   );
 }

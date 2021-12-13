@@ -1,12 +1,21 @@
 import classes from "./newsletter.module.scss";
+import { useRef } from 'react';
 
-function Newsletter() {
+function Newsletter(props) {
+  const emailInputRef = useRef();
+ 
+
+  function sendNewsletter(){
+    const enteredEmail = emailInputRef.current.value
+    console.log(emailInputRef.current.value)
+    props.newsletter(enteredEmail)
+  }
   return (
     <div className={classes.newsletterContainer}>
       <h1>Sign up the makeup fan club</h1>
       <div className={classes.subscriptionData}>
-        <input placeholder="Enter you email address" type="text" />
-        <button>Subscribe</button>
+        <input placeholder="Enter you email address" type='email' id='email' ref={emailInputRef}/>
+        <button onClick={sendNewsletter}>Subscribe</button>
       </div>
     </div>
   );

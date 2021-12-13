@@ -7,9 +7,21 @@ import Reviews from "../components/reviews/reviews";
 import Footer from "../components/footer/footer";
 import ProductsAssociations from "../components/products-association/products-associations";
 import Newsletter from "../components/newsletter/newsletter";
-import Layout from "../components/layout/layout";
 
 export default function Home() {
+  async function newsletterSend(email) {
+    const response = await fetch('/api/hello', {
+      method: 'POST',
+      body: JSON.stringify(email),
+      headers: {
+        'Content-type': 'application/json',
+      }
+    })
+
+    const data = await response.json();
+
+    
+  }
   return (
     <div>
       <MainBanner />
@@ -18,7 +30,7 @@ export default function Home() {
       <ProducersSwiper />
       <Reviews />
       <ProductsAssociations />
-      <Newsletter />
+      <Newsletter newsletter={newsletterSend}/>
       <Footer />
     </div>
   );

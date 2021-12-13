@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "mongodb": "^3.7.1",
+    "mongodb": "^3.7.3",
     "next": "11.1.2",
     "node-fetch": "^3.0.0",
     "node-sass": "^5.0.0",

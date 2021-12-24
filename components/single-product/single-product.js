@@ -1,6 +1,5 @@
 import classes from "./single-product.module.scss";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 function SingleProduct(props) {
   var { product } = props;

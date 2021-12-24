@@ -25,27 +25,36 @@ function MiddleBanner() {
             />
           </div>
           <h1>Season sale</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </p>
         </div>
         <div className={classes.singleAdvantage}>
-        <div className={classes.icon}>
-          <img
-            src="/images/middle-banner/free-shipping-32.png"
-            alt="middle-banner-logo"
-          />
+          <div className={classes.icon}>
+            <img
+              src="/images/middle-banner/free-shipping-32.png"
+              alt="middle-banner-logo"
+            />
           </div>
           <h1>Free shipping</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </p>
         </div>
         <div className={classes.singleAdvantage}>
-        <div className={classes.icon}>
-          <img
-            src="/images/middle-banner/2412985_donate-icon-money-dark-grey-icon-png-transparent.png"
-            alt="middle-banner-logo"
-          />
-        </div>
-        <h1>Money back</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.</p>
+          <div className={classes.icon}>
+            <img
+              src="/images/middle-banner/2412985_donate-icon-money-dark-grey-icon-png-transparent.png"
+              alt="middle-banner-logo"
+            />
+          </div>
+          <h1>Money back</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </p>
         </div>
       </section>
     </div>

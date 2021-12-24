@@ -1,51 +1,56 @@
-import Head from "next/head";
 import { Fragment } from "react";
-import SingleProduct from "../../components/single-product/single-product";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import Layout from "../../components/layout/layout";
 import ProductPage from "../../components/product-page/product-page";
 
-const products = [
-  {
-    image_link:
-      "/images/main-page-products-pictures/coco-body-oil-300x300.jpeg",
-    product_type: "Feminine Deodorants",
-    name: "Coco body oil",
-    price: "60.0",
-  },
-  {
-    image_link:
-      "/images/main-page-products-pictures/daily-moisturizer-300x300.jpeg",
-    product_type: "Skin Fresheners",
-    name: "Daily moisturiser",
-    price: "45.0",
-  },
-  {
-    image_link:
-      "/images/main-page-products-pictures/night-care-cream-300x300.jpeg",
-    product_type: "Balms",
-    name: "Night care cream",
-    price: "25.0",
-  },
-  {
-    image_link:
-      "/images/main-page-products-pictures/rose-essential-oil-300x300.jpeg",
-    product_type: "Face Cream",
-    name: "Rose essential oil",
-    price: "30.0",
-  },
-];
+function ProductDetailPage(props) {
+  if (!props.loadedProduct) {
+    return <p>Loading...</p>;
+  }
 
-function ProductDetailPage() {
-  const router = useRouter();
-  const { slug } = router.query;
-  return (
-        <Fragment>
-          <Head></Head>
-          <ProductPage product={products.find(el => el.name === slug)}/>
-        </Fragment>
+  return <Fragment>{<ProductPage product={props.loadedProduct} />}</Fragment>;
+}
+
+async function getData() {
+  const response = await fetch(
+    "http://makeup-api.herokuapp.com/api/v1/products.json"
   );
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getStaticProps(context) {
+  const { params } = context;
+
+  const productName = params.slug;
+
+  const data = await getData();
+
+  const product = data.find((product) => product.name === productName);
+
+  if (!product) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      loadedProduct: product,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  const data = await getData();
+
+  const productNames = data.map((product) => product.name);
+
+  const pathsWithParams = productNames.map((name) => ({
+    params: { slug: name },
+  }));
+
+  return {
+    paths: pathsWithParams,
+    fallback: true,
+  };
 }
 
 export default ProductDetailPage;

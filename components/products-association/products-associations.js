@@ -1,38 +1,26 @@
 import SingleProduct from "../single-product/single-product";
 import classes from "./products-associations.module.scss";
+import { useEffect, useState } from "react";
 
 function ProductsAssociations() {
-  const products = [
-    {
-      image_link:
-        "/images/main-page-products-pictures/coco-body-oil-300x300.jpeg",
-      product_type: "Feminine Deodorants",
-      name: "Coco body oil",
-      price: "60.0",
-    },
-    {
-      image_link:
-        "/images/main-page-products-pictures/daily-moisturizer-300x300.jpeg",
-      product_type: "Skin Fresheners",
-      name: "Daily moisturiser",
-      price: "45.0",
-    },
-    {
-      image_link:
-        "/images/main-page-products-pictures/night-care-cream-300x300.jpeg",
-      product_type: "Balms",
-      name: "Night care cream",
-      price: "25.0",
-    },
-    {
-      image_link:
-        "/images/main-page-products-pictures/rose-essential-oil-300x300.jpeg",
-      product_type: "Face Cream",
-      name: "Rose essential oil",
-      price: "30.0",
-    },
-  ];
+  const [isLoading, setIsLoading] = useState(true);
+  const [productsData, setProductsData] = useState([]);
 
+  useEffect(() => {
+    async function fetchProductsData() {
+      const response = await fetch(
+        "http://makeup-api.herokuapp.com/api/v1/products.json"
+      );
+      const data = await response.json();
+      setProductsData(data);
+      setIsLoading(false);
+    }
+    fetchProductsData();
+  }, []);
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
   return (
     <div className={classes.productsContainer}>
       <h3>Blossom into a New You!</h3>
@@ -40,7 +28,7 @@ function ProductsAssociations() {
       <p>Lorem ipsum dolor sit amet.</p>
 
       <section className={classes.products}>
-        {products.map((product) => (
+        {productsData.slice(8, 12).map((product) => (
           <SingleProduct product={product} key={product.id} />
         ))}
       </section>

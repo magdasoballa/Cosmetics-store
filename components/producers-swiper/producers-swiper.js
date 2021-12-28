@@ -1,7 +1,7 @@
 import classes from "./producers-swiper.module.scss";
 
 function ProducersSwiper() {
-  const logosArr=[
+  const logosArr = [
     "/images/producers-logo/logo-1.svg",
     "/images/producers-logo/logo-2.svg",
     "/images/producers-logo/logo-3.svg",
@@ -19,7 +19,7 @@ function ProducersSwiper() {
       <div className={classes.slider}>
         <div className={classes.slideTrack}>
           {logosArr.map((el) => (
-            <div className={classes.slide} key={el}>
+            <div className={classes.slide} key={logosArr.indexOf(el)}>
               <img src={el} />
             </div>
           ))}

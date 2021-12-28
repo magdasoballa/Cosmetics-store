@@ -1,11 +1,8 @@
 import classes from "./product-page.module.scss";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 function ProductPage(props) {
-  const router = useRouter();
-  const { slug } = router.query;
-  var { product } = props;
+  const { product } = props;
   const linkPath = `/products/${product.name}`;
   return (
     <Link href={linkPath}>

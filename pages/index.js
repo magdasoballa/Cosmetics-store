@@ -7,7 +7,7 @@ import Footer from "../components/footer/footer";
 import ProductsAssociations from "../components/products-association/products-associations";
 import Newsletter from "../components/newsletter/newsletter";
 
-export default function Home(props) {
+export default function HomePage(props) {
   async function newsletterSend(email) {
     const response = await fetch("/api/hello", {
       method: "POST",
@@ -19,6 +19,7 @@ export default function Home(props) {
 
     const data = await response.json();
   }
+
   return (
     <div>
       <MainBanner />

@@ -1,5 +1,6 @@
 import classes from "./main-banner.module.scss";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 function MainBanner() {
   const [index, setIndex] = useState(0);
@@ -26,6 +27,13 @@ function MainBanner() {
   return (
     <div className={classes.banner}>
       <img src={bannersArray[index]} alt="test" />
+      {/* <Image
+        className={classes.main}
+        src={bannersArray[index]}
+        alt="test"
+        width={1350}
+        height={600}
+      /> */}
       <section className={classes.title}>
         <h6>A whole new look</h6>
         <h1>Beauty pronounced</h1>

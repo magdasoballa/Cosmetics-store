@@ -15,8 +15,8 @@ function Footer() {
           <Image
             src="/images/main-logo.png"
             alt="test"
-            width="100"
-            height="50"
+            width={180}
+            height={40}
           />
         </div>
         <div className={classes.links}>

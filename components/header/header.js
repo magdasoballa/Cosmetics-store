@@ -1,9 +1,10 @@
 import Image from "next/image";
 import classes from "./header.module.scss";
 import Link from "next/link";
-import { BsHeart} from 'react-icons/bs';
-import { VscAccount } from 'react-icons/vsc'
-import { FiShoppingBag } from 'react-icons/fi'
+import { BsHeart } from "react-icons/bs";
+import { VscAccount } from "react-icons/vsc";
+import { FiShoppingBag } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 function Header() {
   return (
@@ -15,7 +16,7 @@ function Header() {
               src="/images/main-logo.png"
               alt="Cosmetics logo"
               width={180}
-              height={39}
+              height={40}
             />
           </a>
         </Link>
@@ -38,11 +39,19 @@ function Header() {
             <Link href="/contact">Contact</Link>
           </li>
           <li className={classes.icons}>
-          <div><BsHeart/></div>
-          <div><VscAccount/></div>
-          <div><FiShoppingBag/></div>
+            <div>
+              <BsHeart />
+            </div>
+            <div>
+              <VscAccount />
+            </div>
+            <div>
+              <Link href="/cart">
+                <FiShoppingBag />
+              </Link>
+            </div>
           </li>
-        </ul >
+        </ul>
       </nav>
     </div>
   );

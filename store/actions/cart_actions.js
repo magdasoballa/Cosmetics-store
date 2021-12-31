@@ -4,6 +4,15 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const ADD_QUANTITY = "ADD_QUANTITY";
 export const REMOVE_QUANTITY = "REMOVE_QUANTITY";
+export const SYNCHRONIZE_REDUCER = "SYNCHRONIZE_REUCES";
+
+export const syncReducer = () => (dispatch) => {
+  const payload = JSON.parse(localStorage.getItem("products")) || [];
+  return dispatch({
+    type: SYNCHRONIZE_REDUCER,
+    payload,
+  });
+};
 
 export const addToCartAction = (product) => (dispatch) => {
   return dispatch({

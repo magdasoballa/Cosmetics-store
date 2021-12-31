@@ -4,6 +4,7 @@ import {
   CLEAR_CART,
   ADD_QUANTITY,
   REMOVE_QUANTITY,
+  SYNCHRONIZE_REDUCER,
 } from "../../actions/cart_actions";
 
 const INITIAL_STATE = {
@@ -12,18 +13,26 @@ const INITIAL_STATE = {
 
 export const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
-    case ADD_TO_CART:
+    case SYNCHRONIZE_REDUCER:
       return {
         ...state,
-        cart: [...state.cart, { item: payload, quantity: 1 }],
+        cart: payload,
+      };
+    case ADD_TO_CART:
+      const updatedCard = [...state.cart, { item: payload, quantity: 1 }];
+      return {
+        ...state,
+        cart: updatedCard,
       };
     case REMOVE_FROM_CART:
       const productToRemove = state.cart.find((el) => el.item.id === payload);
+      const updatedCarda = state.cart.filter((el) => el !== productToRemove);
       return {
         ...state,
-        cart: state.cart.filter((el) => el !== productToRemove),
+        cart: updatedCarda,
       };
     case ADD_QUANTITY:
+      console.log(state.cart, " co jest kurwa");
       const productToChangeQuan = state.cart.find(
         (el) => el.item.id === payload
       );
@@ -35,10 +44,10 @@ export const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
       }
       const updatedStateCart = JSON.parse(JSON.stringify(state.cart));
       updatedStateCart[index].quantity += 1;
-
+      const updatedCardb = [...updatedStateCart];
       return {
         ...state,
-        cart: [...updatedStateCart],
+        cart: updatedCardb,
       };
 
     case REMOVE_QUANTITY:
@@ -55,10 +64,10 @@ export const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
         JSON.stringify(state.cart)
       );
       updatedStateCartWithLessAmount[indexToRemoveQuantity].quantity -= 1;
-
+      const updatedCardc = [...updatedStateCartWithLessAmount];
       return {
         ...state,
-        cart: [...updatedStateCartWithLessAmount],
+        cart: updatedCardc,
       };
 
     case CLEAR_CART:

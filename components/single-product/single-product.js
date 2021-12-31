@@ -5,40 +5,13 @@ import { addToCartAction, addQuantity } from "../../store/actions/cart_actions";
 import { forwardRef, useEffect, useState } from "react";
 
 function SingleProduct(props) {
-  const [productsFromCart, setProductsFromCart] = useState([]);
-  const [productsAddedToCart, setProductsAddedToCart] = useState([]);
-
-  useState(() => {
-    const prod = localStorage.getItem("products");
-    if (prod) {
-      const parsedProducta = JSON.parse(prod);
-      setProductsAddedToCart(parsedProducta);
-    }
-  }, []);
-
+  const cart = useSelector(({ cart }) => cart.cart);
   const dispatch = useDispatch();
   const { product } = props;
   const linkPath = `/products/${product.name}`;
 
-  const productObject = {
-    product: product,
-    quantity: 1,
-  };
-
   const addToCart = () => {
     dispatch(addToCartAction(product));
-    const newArr = JSON.parse(JSON.stringify(productsAddedToCart));
-    newArr.push(productObject);
-    setProductsAddedToCart(newArr);
-
-    localStorage.setItem("products", JSON.stringify(productsAddedToCart));
-
-    if (typeof window !== "undefined") {
-      const productsArr = JSON.parse(localStorage.getItem("products"));
-      console.log(productsArr);
-      setProductsFromCart(productsArr);
-    }
-    console.log(productsFromCart);
   };
 
   const increaseQuantity = () => {
@@ -59,10 +32,9 @@ function SingleProduct(props) {
       </Link>
       <button
         onClick={
-          // productsAddedToCart.find((el) => el.product.id === product.id)
-          //   ? increaseQuantity
-          //   : () => addToCart()
-          addToCart
+          cart.find((el) => el.item?.id === product.id)
+            ? () => increaseQuantity()
+            : () => addToCart()
         }
       >
         +

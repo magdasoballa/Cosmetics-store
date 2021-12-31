@@ -4,8 +4,6 @@ import { Provider } from "react-redux";
 import { store } from "../store/reducers";
 
 function MyApp({ Component, pageProps }) {
-  // const store = createStore(cartReducer);
-  console.log(store);
   return (
     <Provider store={store}>
       <Layout>

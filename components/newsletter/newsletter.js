@@ -1,5 +1,6 @@
 import classes from "./newsletter.module.scss";
 import { useRef } from "react";
+import React from "react";
 
 function Newsletter(props) {
   const emailInputRef = useRef();

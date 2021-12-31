@@ -1,17 +1,50 @@
 import classes from "./single-product.module.scss";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { addToCartAction } from "../../store/actions/cart_actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCartAction, addQuantity } from "../../store/actions/cart_actions";
+import { forwardRef, useEffect, useState } from "react";
 
 function SingleProduct(props) {
+  const [productsFromCart, setProductsFromCart] = useState([]);
+  const [productsAddedToCart, setProductsAddedToCart] = useState([]);
+
+  useState(() => {
+    const prod = localStorage.getItem("products");
+    if (prod) {
+      const parsedProducta = JSON.parse(prod);
+      setProductsAddedToCart(parsedProducta);
+    }
+  }, []);
+
   const dispatch = useDispatch();
   const { product } = props;
   const linkPath = `/products/${product.name}`;
 
+  const productObject = {
+    product: product,
+    quantity: 1,
+  };
+
   const addToCart = () => {
     dispatch(addToCartAction(product));
-    localStorage.setItem(product.id, JSON.stringify(product));
+    const newArr = JSON.parse(JSON.stringify(productsAddedToCart));
+    newArr.push(productObject);
+    setProductsAddedToCart(newArr);
+
+    localStorage.setItem("products", JSON.stringify(productsAddedToCart));
+
+    if (typeof window !== "undefined") {
+      const productsArr = JSON.parse(localStorage.getItem("products"));
+      console.log(productsArr);
+      setProductsFromCart(productsArr);
+    }
+    console.log(productsFromCart);
   };
+
+  const increaseQuantity = () => {
+    dispatch(addQuantity(product.id));
+  };
+
   return (
     <div>
       <Link href={linkPath}>
@@ -24,7 +57,16 @@ function SingleProduct(props) {
           </div>
         </a>
       </Link>
-      <button onClick={addToCart}>+</button>
+      <button
+        onClick={
+          // productsAddedToCart.find((el) => el.product.id === product.id)
+          //   ? increaseQuantity
+          //   : () => addToCart()
+          addToCart
+        }
+      >
+        +
+      </button>
     </div>
   );
 }

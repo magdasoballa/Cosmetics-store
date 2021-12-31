@@ -5,21 +5,26 @@ import {
   removeFromCart,
   clearCart,
   addQuantity,
+  removeQuantity,
 } from "../../store/actions/cart_actions";
+import { useEffect, useState } from "react";
 
 function Cart() {
+  const [productsAddedToCart, setProductsAddedToCart] = useState([]);
+
   const dispatch = useDispatch();
   const cart = useSelector(({ cart }) => cart.cart);
-
-  const productsAddedToCart = cart.map((product) =>
-    JSON.parse(
-      typeof window !== "undefined"
-        ? localStorage.getItem(product.item.id)
-        : null
-    )
-  );
-
+  const prodArr = [];
   const quantities = cart.map((el) => el.quantity);
+
+  useEffect(() => {
+    console.log(prodArr);
+    for (let [key, value] of Object.entries(localStorage)) {
+      prodArr.push(JSON.parse(value));
+    }
+    setProductsAddedToCart(prodArr);
+    console.log(prodArr.map((el) => el.product));
+  }, []);
 
   const removeItemFromCart = (index) => {
     const removedItem = cart.find((el) => el.item.id === index);
@@ -31,20 +36,32 @@ function Cart() {
     dispatch(addQuantity(index));
   };
 
+  const removeOneFromCart = (index) => {
+    dispatch(removeQuantity(index));
+  };
+
   const removeAllItemsFromCart = () => {
     dispatch(clearCart());
     localStorage.clear();
   };
 
   return (
-    <div>
+    <div className={classes.container}>
+      <h1 className={classes.title}>CART</h1>
       <ul className={classes.productsContainer}>
         {productsAddedToCart.map((el, i) => (
-          <li key={el.id}>
-            {el.name}
+          <li key={el.product.id}>
+            <div className={classes.productName}>{el.product.name}</div>
             {quantities[i]}
-            <button onClick={() => addOneMoreToCart(el.id)}> + </button>
-            <button onClick={() => removeItemFromCart(el.id)}> - </button>
+            <button onClick={() => addOneMoreToCart(el.product.id)}> + </button>
+            <button onClick={() => removeOneFromCart(el.product.id)}>
+              {" "}
+              -{" "}
+            </button>
+            <button onClick={() => removeItemFromCart(el.product.id)}>
+              {" "}
+              delete{" "}
+            </button>
           </li>
         ))}
       </ul>

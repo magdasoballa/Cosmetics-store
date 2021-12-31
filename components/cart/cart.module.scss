@@ -1,7 +1,27 @@
-.productsContainer {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   flex-direction: column;
+  .title {
+    font-weight: 300;
+    font-size: 30px;
+    font-family: "Montserrat", sans-serif;
+    color: #000;
+    margin-left: 30px;
+    align-self: flex-start;
+  }
+
+  .productsContainer {
+    li {
+      list-style-type: none;
+      .productName {
+        font-size: 19px;
+        font-family: "Cormorant", serif;
+        color: #808285;
+        align-self: flex-start;
+      }
+    }
+  }
 }

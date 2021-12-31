@@ -13,16 +13,18 @@ function ProducersSwiper() {
     "/images/producers-logo/logo-4.svg",
     "/images/producers-logo/logo-5.svg",
   ];
+  let randomNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <div className={classes.producersContainer}>
       <div className={classes.slider}>
         <div className={classes.slideTrack}>
-          {logosArr.map((el) => (
-            <div className={classes.slide} key={logosArr.indexOf(el)}>
+          {logosArr.map((el, i) => (
+            <div className={classes.slide} key={randomNumber[i]}>
               <img src={el} />
             </div>
           ))}
+          {randomNumber}
         </div>
       </div>
     </div>

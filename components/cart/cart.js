@@ -7,29 +7,13 @@ import {
   addQuantity,
   removeQuantity,
 } from "../../store/actions/cart_actions";
-import { useEffect, useState } from "react";
 
 function Cart() {
-  const [productsAddedToCart, setProductsAddedToCart] = useState([]);
-
   const dispatch = useDispatch();
   const cart = useSelector(({ cart }) => cart.cart);
-  const prodArr = [];
-  const quantities = cart.map((el) => el.quantity);
-
-  useEffect(() => {
-    console.log(prodArr);
-    for (let [key, value] of Object.entries(localStorage)) {
-      prodArr.push(JSON.parse(value));
-    }
-    setProductsAddedToCart(prodArr);
-    console.log(prodArr.map((el) => el.product));
-  }, []);
 
   const removeItemFromCart = (index) => {
-    const removedItem = cart.find((el) => el.item.id === index);
     dispatch(removeFromCart(index));
-    localStorage.removeItem(removedItem.item.id);
   };
 
   const addOneMoreToCart = (index) => {
@@ -38,6 +22,10 @@ function Cart() {
 
   const removeOneFromCart = (index) => {
     dispatch(removeQuantity(index));
+    const product = cart.find((el) => el.item.id === index);
+    if (product.quantity === 1) {
+      removeItemFromCart(product.item.id);
+    }
   };
 
   const removeAllItemsFromCart = () => {
@@ -49,21 +37,26 @@ function Cart() {
     <div className={classes.container}>
       <h1 className={classes.title}>CART</h1>
       <ul className={classes.productsContainer}>
-        {productsAddedToCart.map((el, i) => (
-          <li key={el.product.id}>
-            <div className={classes.productName}>{el.product.name}</div>
-            {quantities[i]}
-            <button onClick={() => addOneMoreToCart(el.product.id)}> + </button>
-            <button onClick={() => removeOneFromCart(el.product.id)}>
-              {" "}
-              -{" "}
-            </button>
-            <button onClick={() => removeItemFromCart(el.product.id)}>
-              {" "}
-              delete{" "}
-            </button>
-          </li>
-        ))}
+        {cart
+          ? cart.map((el, i) => (
+              <li key={el.item.id}>
+                <div className={classes.productName}>{el.item.name}</div>
+                {el.quantity}
+                <button onClick={() => addOneMoreToCart(el.item.id)}>
+                  {" "}
+                  +{" "}
+                </button>
+                <button onClick={() => removeOneFromCart(el.item.id)}>
+                  {" "}
+                  -{" "}
+                </button>
+                <button onClick={() => removeItemFromCart(el.item.id)}>
+                  {" "}
+                  delete{" "}
+                </button>
+              </li>
+            ))
+          : null}
       </ul>
       <button onClick={() => removeAllItemsFromCart()}>Clear cart</button>
     </div>

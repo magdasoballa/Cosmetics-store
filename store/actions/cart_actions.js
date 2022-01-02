@@ -4,7 +4,7 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const ADD_QUANTITY = "ADD_QUANTITY";
 export const REMOVE_QUANTITY = "REMOVE_QUANTITY";
-export const SYNCHRONIZE_REDUCER = "SYNCHRONIZE_REUCES";
+export const SYNCHRONIZE_REDUCER = "SYNCHRONIZE_REDUCER";
 
 export const syncReducer = () => (dispatch) => {
   const payload = JSON.parse(localStorage.getItem("products")) || [];

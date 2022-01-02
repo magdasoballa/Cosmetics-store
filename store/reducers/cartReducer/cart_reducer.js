@@ -19,22 +19,23 @@ export const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
         cart: payload,
       };
     case ADD_TO_CART:
-      const updatedCard = [...state.cart, { item: payload, quantity: 1 }];
+      const updatedCart = [...state.cart, { item: payload, quantity: 1 }];
       return {
         ...state,
-        cart: updatedCard,
+        cart: updatedCart,
       };
     case REMOVE_FROM_CART:
       const productToRemove = state.cart.find((el) => el.item.id === payload);
-      const updatedCarda = state.cart.filter((el) => el !== productToRemove);
+      const updatedCartAfterRemove = state.cart.filter(
+        (el) => el.item.id !== productToRemove?.item.id
+      );
       return {
         ...state,
-        cart: updatedCarda,
+        cart: updatedCartAfterRemove,
       };
     case ADD_QUANTITY:
-      console.log(state.cart, " co jest kurwa");
       const productToChangeQuan = state.cart.find(
-        (el) => el.item.id === payload
+        (el) => el.item?.id === payload
       );
       const index = state.cart.findIndex(
         (item) => item === productToChangeQuan
@@ -44,10 +45,10 @@ export const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
       }
       const updatedStateCart = JSON.parse(JSON.stringify(state.cart));
       updatedStateCart[index].quantity += 1;
-      const updatedCardb = [...updatedStateCart];
+      const updatedCartAfterAdding = [...updatedStateCart];
       return {
         ...state,
-        cart: updatedCardb,
+        cart: updatedCartAfterAdding,
       };
 
     case REMOVE_QUANTITY:
@@ -64,10 +65,10 @@ export const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
         JSON.stringify(state.cart)
       );
       updatedStateCartWithLessAmount[indexToRemoveQuantity].quantity -= 1;
-      const updatedCardc = [...updatedStateCartWithLessAmount];
+      const updatedCartAfterRemoving = [...updatedStateCartWithLessAmount];
       return {
         ...state,
-        cart: updatedCardc,
+        cart: updatedCartAfterRemoving,
       };
 
     case CLEAR_CART:
